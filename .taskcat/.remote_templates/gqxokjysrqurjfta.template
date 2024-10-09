@@ -11,7 +11,6 @@ Resources:
       Tags:
         - Key: Name 
           Value: "Group 12 VPC"
-          
   
   PublicSubnet: #create public subnet
     Type: AWS::EC2::Subnet 

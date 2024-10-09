@@ -2,21 +2,21 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Create NAT Gateway
 
 Parameters: 
-  # VPCId:
-  #   Type: String 
+  VPCId:
+    Type: String 
   PublicSubnetId:
     Type: String
-  # PrivateSubnetId:
-  #   Type: String
-  # InternetGatewayId:
-  #   Type: String
+  PrivateSubnetId:
+    Type: String
+  InternetGatewayId:
+    Type: String
 
 
 Resources: 
   EIPForNAT:
     Type: AWS::EC2::EIP
     Properties:
-      Domain: vpc
+      Domain: VPC
       Tags:
       - Key: Name
         Value: "Group-12-NAT-EIP"

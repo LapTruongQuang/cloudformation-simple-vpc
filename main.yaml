@@ -3,12 +3,12 @@ Resources:
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://my-unique-bucket-tf.s3.amazonaws.com/vpc.yaml
+      TemplateURL: https://group12-testing-bucket.s3.amazonaws.com/vpc.yaml
       #set a new url for vpc.yaml
   NatGatewayStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://my-unique-bucket-tf.s3.amazonaws.com/NAT.yaml #set a new url for NAT.yaml
+      TemplateURL: https://group12-testing-bucket.s3.amazonaws.com/NAT.yaml
       Parameters:
         VPCId: !GetAtt VPCStack.Outputs.VPCId
         PublicSubnetId: !GetAtt VPCStack.Outputs.PublicSubnetId
@@ -18,7 +18,7 @@ Resources:
   RouteTableStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://my-unique-bucket-tf.s3.amazonaws.com/RouteTable.yaml
+      TemplateURL: https://group12-testing-bucket.s3.amazonaws.com/RouteTable.yaml
       Parameters:
         VPCId: !GetAtt VPCStack.Outputs.VPCId
         PublicSubnetId: !GetAtt VPCStack.Outputs.PublicSubnetId
@@ -29,7 +29,7 @@ Resources:
   EC2Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://my-unique-bucket-tf.s3.amazonaws.com/EC2.yaml  
+      TemplateURL: https://group12-testing-bucket.s3.amazonaws.com/EC2.yaml 
       Parameters:
         VPCId: !GetAtt VPCStack.Outputs.VPCId
         PublicSubnetId: !GetAtt VPCStack.Outputs.PublicSubnetId

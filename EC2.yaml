@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create EC2 Instances
+
+
+Parameters: 
+  VPCId:
+    Type: String
+  PublicSubnetId:
+    Type: String
+  PrivateSubnetId:
+    Type: String
+  
+
+Resources:
+  PublicEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0ebfd941bbafe70c6
+      SecurityGroupIds:
+        - !Ref PublicSecurityGroup
+      SubnetId: !Ref PublicSubnetId
+      KeyName: testkeypair
+      Tags:
+        - Key: Name
+          Value: "Group-12-Public-EC2-Instance"
+    
+  PrivateEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0ebfd941bbafe70c6
+      NetworkInterfaces:
+        - GroupSet:
+          - !Ref PrivateSecurityGroup
+          AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          DeleteOnTermination: true
+          SubnetId: !Ref PrivateSubnetId
+      KeyName: testkeypair
+      Tags:
+        - Key: Name
+          Value: "Group-12-Private-EC2-Instance"
+    
+  PublicSecurityGroup: #check lai ccai nay
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access via specific IP
+      SecurityGroupIngress:
+        - CidrIp: 192.168.1.1/32
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: tcp
+  
+  PrivateSecurityGroup: #check lai ccai nay
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access from Public instance
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !GetAtt PublicSecurityGroup.GroupId
+        - IpProtocol: icmp 
+          FromPort: -1
+          ToPort: -1
+          SourceSecurityGroupId: !GetAtt PublicSecurityGroup
+  
+ 
+
+
+Outputs:
+  PublicEC2Instance:
+    Description: Public EC2 Instance
+    Value: !Ref PublicEC2Instance
+  PrivateEC2Instance:
+    Description: Private EC2 Instance
+    Value: !Ref PrivateEC2Instance

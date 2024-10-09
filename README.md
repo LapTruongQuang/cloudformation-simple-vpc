@@ -1,6 +1,7 @@
 # AWS VPC Deployment with CloudFormation and TaskCat Testing
 
 This repository is for the NT548.P11 course - Fall 2024 semester at University of Information Technology - VNUHCM.
+
 Provides a CloudFormation-based solution to create a Virtual Private Cloud (VPC) on AWS, complete with EC2 instances, NAT Gateway, and routing configurations. The deployment is tested using TaskCat, ensuring the infrastructure's correctness. We will also use an S3 bucket to store and deploy the CloudFormation templates.
 
 ## Table of Contents

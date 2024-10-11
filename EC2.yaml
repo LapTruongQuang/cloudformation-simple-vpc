@@ -12,7 +12,7 @@ Parameters:
   
 
 Resources:
-  PublicSecurityGroup: #check lai ccai nay
+  PublicSecurityGroup: #Create Public Security Group
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access via specific IP
@@ -24,7 +24,7 @@ Resources:
           IpProtocol: tcp
 
   
-  PrivateSecurityGroup: #check lai ccai nay
+  PrivateSecurityGroup: #Create Private Security Group
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access from Public instance
@@ -69,11 +69,6 @@ Resources:
       Tags:
         - Key: Name
           Value: "Group-12-Private-EC2-Instance"
-    
-
-
- 
-
 
 Outputs:
   PublicEC2Instance:

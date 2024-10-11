@@ -10,7 +10,7 @@ Resources:
   EIPForNAT: #Create Elastic IP for NAT Gateway
     Type: AWS::EC2::EIP
     Properties:
-      Domain: VPC
+      Domain: vpc
       Tags:
       - Key: Name
         Value: "Group-12-NAT-EIP"
